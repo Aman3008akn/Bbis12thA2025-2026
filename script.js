@@ -167,27 +167,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // WhatsApp Redirect for Support Link with Premium Effect
-    const supportLinks = document.querySelectorAll('.support-link');
-    supportLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Add premium click effect
-            this.style.transform = "scale(0.95)";
-            this.style.opacity = "0.7";
-            
-            setTimeout(() => {
-                this.style.transform = "";
-                this.style.opacity = "";
-                
-                // Redirect to WhatsApp with professional message
-                window.open('https://wa.me/918826817677?text=Hello,%20I%20need%20assistance%20with%20the%2012th%20A%20farewell%20website.', '_blank');
-            }, 200);
-        });
-    });
-
-    // Enhanced Parallax effect for hero section
+    // CTA Button Animation with Premium Effect
+    const ctaButton = document.querySelector('.cta-button');
     window.addEventListener('scroll', function() {
         const scrollPosition = window.pageYOffset;
         const hero = document.querySelector('.hero');
