@@ -229,19 +229,59 @@ function deleteTeacher(id) {
 function loadMemories() {
     const memoriesList = document.getElementById('memoriesList');
     
-    const memories = [];
+    // Mock data - will be replaced with Supabase query
+    // In production: const { data: memories } = await supabase.from('memories').select('*').order('created_at', { ascending: false });
+    const memories = [
+        {
+            id: 1,
+            name: 'Sample Student',
+            email: 'student@example.com',
+            memory: 'This is a sample memory submitted from the website.',
+            is_approved: true,
+            created_at: '2025-12-12T14:30:00'
+        }
+    ];
+
+    // Get from localStorage if available (simulate submission)
+    const localMemories = localStorage.getItem('submitted_memories');
+    if (localMemories) {
+        try {
+            const parsedMemories = JSON.parse(localMemories);
+            memories.push(...parsedMemories);
+        } catch (e) {
+            console.error('Error parsing memories:', e);
+        }
+    }
 
     memoriesList.innerHTML = memories.length > 0 
-        ? memories.map(memory => `
+        ? `<div class="memories-list">` + memories.map((memory, index) => `
             <div class="item-card">
                 <div class="item-content">
                     <div class="item-title">${memory.name}</div>
-                    <div class="item-description">${memory.memory}</div>
-                    <small style="color: var(--text-muted);">${memory.email}</small>
+                    <div class="item-description">"${memory.memory}"</div>
+                    <small style="color: var(--text-muted); display: block; margin-top: 0.5rem;">
+                        📧 ${memory.email} | 📅 ${new Date(memory.created_at).toLocaleDateString()}
+                    </small>
+                    <div class="item-actions" style="margin-top: 1rem;">
+                        <button class="btn-edit" onclick="approveMemory(${index})">✓ Approve</button>
+                        <button class="btn-danger" onclick="rejectMemory(${index})">✗ Reject</button>
+                    </div>
                 </div>
             </div>
-        `).join('')
-        : '<p style="text-align: center; color: var(--text-muted); grid-column: 1 / -1;">No memories submitted yet.</p>';
+        `).join('') + `</div>`
+        : '<p style="text-align: center; color: var(--text-muted); grid-column: 1 / -1; padding: 2rem;">No memories submitted yet. They will appear here when students submit their memories!</p>';
+}
+
+function approveMemory(id) {
+    alert('Memory approved! ✓');
+    // In production: await supabase.from('memories').update({ is_approved: true }).eq('id', id);
+}
+
+function rejectMemory(id) {
+    if(confirm('Are you sure you want to reject this memory?')) {
+        alert('Memory rejected.');
+        // In production: await supabase.from('memories').delete().eq('id', id);
+    }
 }
 
 // Forms

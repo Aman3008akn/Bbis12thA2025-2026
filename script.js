@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form Submission Handling with Premium Feedback
     const memoryForm = document.querySelector('.memory-form');
     if (memoryForm) {
-        memoryForm.addEventListener('submit', function(e) {
+        memoryForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Get form values
@@ -119,26 +119,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitButton.textContent = "Submitting...";
                 submitButton.disabled = true;
                 
-                // Simulate premium processing
-                setTimeout(() => {
-                    submitButton.textContent = "Submitted!";
-                    submitButton.style.background = "rgba(212, 175, 55, 0.2)";
-                    submitButton.style.borderColor = "#d4af37";
-                    submitButton.style.color = "#d4af37";
+                try {
+                    // Save to local storage for admin dashboard
+                    const submittedMemory = submitMemoryToStorage(name, email, memory);
                     
-                    // Show success message
-                    alert(`Thank you ${name}! Your memory has been submitted successfully.`);
+                    // Save to Supabase if available
+                    if (window.supabaseClient) {
+                        console.log('Memory would be saved to Supabase:', submittedMemory);
+                        // In production: 
+                        // const { data, error } = await supabase.from('memories').insert([submittedMemory]);
+                    }
                     
-                    // Reset form after delay
+                    // Simulate premium processing
                     setTimeout(() => {
-                        this.reset();
-                        submitButton.textContent = originalText;
-                        submitButton.disabled = false;
-                        submitButton.style.background = "";
-                        submitButton.style.borderColor = "";
-                        submitButton.style.color = "";
-                    }, 2000);
-                }, 1500);
+                        submitButton.textContent = "Submitted!";
+                        submitButton.style.background = "rgba(212, 175, 55, 0.2)";
+                        submitButton.style.borderColor = "#d4af37";
+                        submitButton.style.color = "#d4af37";
+                        
+                        // Show success message
+                        alert(`Thank you ${name}! Your memory has been submitted successfully. ❤️`);
+                        
+                        // Reset form after delay
+                        setTimeout(() => {
+                            this.reset();
+                            submitButton.textContent = originalText;
+                            submitButton.disabled = false;
+                            submitButton.style.background = "";
+                            submitButton.style.borderColor = "";
+                            submitButton.style.color = "";
+                        }, 2000);
+                    }, 1500);
+                } catch (error) {
+                    console.error('Error submitting memory:', error);
+                    alert('Error submitting memory. Please try again.');
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }
             } else {
                 // Premium error effect
                 this.classList.add('shake');
@@ -309,8 +326,39 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Add premium animations to the stylesheet dynamically
-const style = document.createElement('style');
+// Memory Submission Helper
+function submitMemoryToStorage(name, email, memory) {
+    const newMemory = {
+        id: Date.now(),
+        name: name,
+        email: email,
+        memory: memory,
+        is_approved: false,
+        created_at: new Date().toISOString()
+    };
+
+    // Get existing memories from localStorage
+    let memories = [];
+    const existingMemories = localStorage.getItem('submitted_memories');
+    if (existingMemories) {
+        try {
+            memories = JSON.parse(existingMemories);
+        } catch (e) {
+            memories = [];
+        }
+    }
+
+    // Add new memory
+    memories.push(newMemory);
+
+    // Save back to localStorage
+    localStorage.setItem('submitted_memories', JSON.stringify(memories));
+
+    console.log('Memory saved to storage:', newMemory);
+    return newMemory;
+}
+
+// Initialize tracking
 style.textContent = `
     @keyframes float {
         0% {
