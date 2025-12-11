@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signing Off - 12thA 2025-2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add favicon -->
+    <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="particles"></div>
+        <div class="hero-content">
+            <div class="logo-container">
+                <img src="logo.png" alt="Bal Bhavan International School Logo" class="school-logo">
+            </div>
+            <h1 class="hero-title">12th A — 2025–26</h1>
+            <p class="hero-subtitle">A year remembered forever.</p>
+            <button class="cta-button">Enter Memories</button>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Memorable Moments</h2>
+            <div class="gallery-grid">
+                <!-- User's WhatsApp Image -->
+                <div class="gallery-item" data-aos="fade-up">
+                    <img src="https://i.ibb.co/6JN2L8PM/Whats-App-Image-2025-12-11-at-11-39-17-PM.jpg" alt="Class 12th A ❤️" onerror="this.src='https://placehold.co/800x600/1a1f36/6f8cff?text=Your+Image+Here'">
+                </div>
+            </div>
+            <p class="gallery-caption">More precious moments coming soon. Stay tuned! ✨</p>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="highlights-section" id="highlights">
+        <div class="container">
+            <h2 class="section-title">Highlights</h2>
+            <div class="cards-container">
+                <div class="highlight-card" data-aos="fade-up">
+                    <div class="card-icon">
+                        <i class="fas fa-camera-retro"></i>
+                    </div>
+                    <h3>Farewell Moments</h3>
+                    <p>Celebrating our journey with unforgettable memories and heartfelt goodbyes that will last a lifetime.</p>
+                    <p class="coming-soon">(✨ Exclusive moments unveiling soon ✨)</p>
+                </div>
+                <div class="highlight-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Teachers & Mentors</h3>
+                    <p>Invaluable guidance and support from educators who shaped our futures with wisdom and care.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section class="teachers-section" id="teachers">
+        <div class="container">
+            <h2 class="section-title">Our Esteemed Teachers</h2>
+            <div class="teachers-grid">
+                <div class="teacher-card" data-aos="fade-up">
+                    <div class="teacher-image">
+                        <img src="" alt="Rajesh" style="display:none;">
+                    </div>
+                    <h3>Rajesh</h3>
+                    <p></p>
+                </div>
+                <div class="teacher-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="teacher-image">
+                        <img src="" alt="" style="display:none;">
+                    </div>
+                    <h3></h3>
+                    <p></p>
+                </div>
+                <div class="teacher-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="teacher-image">
+                        <img src="" alt="" style="display:none;">
+                    </div>
+                    <h3></h3>
+                    <p></p>
+                </div>
+                <div class="teacher-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="teacher-image">
+                        <img src="" alt="" style="display:none;">
+                    </div>
+                    <h3></h3>
+                    <p></p>
+                </div>
+            </div>
+            <p class="teachers-update">📝 Teacher profiles updating soon. Stay connected!</p>
+        </div>
+    </section>
+
+    <!-- Memory Submission Section -->
+    <section class="memory-section" id="memory">
+        <div class="container">
+            <h2 class="section-title">Share Your Memory</h2>
+            <p class="section-description">Contribute to our collective journey by sharing your favorite moments from this remarkable year. Every memory matters.</p>
+            <form class="memory-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Share your most cherished memory from this year..." class="form-textarea" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Submit Memory</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2025 | Bal Bhavan International School — 12th A | Signing Off With Love ❤️</p>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/12_a_202526/" target="_blank" class="footer-link">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="#" class="footer-link support-link">
+                    <i class="fab fa-whatsapp"></i> Contact Support
+                </a>
+            </div>
+        </div>
+    </footer>
+    <div class="modal" id="imageModal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="caption"></div>
+    </div>
+
+    <script src="supabase-config.js"></script>
+    <script src="device-tracker.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — 12th A Memories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-crown"></i> Admin Panel</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-section="gallery">
+                    <i class="fas fa-images"></i> Gallery
+                </a>
+                <a href="#" class="nav-item" data-section="highlights">
+                    <i class="fas fa-star"></i> Highlights
+                </a>
+                <a href="#" class="nav-item" data-section="teachers">
+                    <i class="fas fa-chalkboard-user"></i> Teachers
+                </a>
+                <a href="#" class="nav-item" data-section="memories">
+                    <i class="fas fa-heart"></i> Memories
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <a href="#" class="nav-item" data-section="activity-logs">
+                    <i class="fas fa-history"></i> Activity Logs
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1 id="sectionTitle">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="status-indicator">
+                        <i class="fas fa-circle" id="statusDot"></i>
+                        <span id="statusText">Connected</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="Admin">
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="section active">
+                    <div class="dashboard-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-images"></i></div>
+                            <div class="stat-info">
+                                <h3>Gallery Images</h3>
+                                <p class="stat-number" id="galleryCount">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                            <div class="stat-info">
+                                <h3>Submitted Memories</h3>
+                                <p class="stat-number" id="memoriesCount">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-chalkboard-user"></i></div>
+                            <div class="stat-info">
+                                <h3>Teachers</h3>
+                                <p class="stat-number" id="teachersCount">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-star"></i></div>
+                            <div class="stat-info">
+                                <h3>Highlights</h3>
+                                <p class="stat-number" id="highlightsCount">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recent-activity">
+                        <h2>Recent Activity</h2>
+                        <div id="activityList" class="activity-list"></div>
+                    </div>
+                </section>
+
+                <!-- Gallery Section -->
+                <section id="gallery" class="section">
+                    <div class="section-header">
+                        <h2>Manage Gallery</h2>
+                        <button class="btn-primary" id="addImageBtn">
+                            <i class="fas fa-plus"></i> Add Image
+                        </button>
+                    </div>
+                    <div id="galleryList" class="gallery-management"></div>
+                </section>
+
+                <!-- Highlights Section -->
+                <section id="highlights" class="section">
+                    <div class="section-header">
+                        <h2>Manage Highlights</h2>
+                        <button class="btn-primary" id="addHighlightBtn">
+                            <i class="fas fa-plus"></i> Add Highlight
+                        </button>
+                    </div>
+                    <div id="highlightsList" class="highlights-management"></div>
+                </section>
+
+                <!-- Teachers Section -->
+                <section id="teachers" class="section">
+                    <div class="section-header">
+                        <h2>Manage Teachers</h2>
+                        <button class="btn-primary" id="addTeacherBtn">
+                            <i class="fas fa-plus"></i> Add Teacher
+                        </button>
+                    </div>
+                    <div id="teachersList" class="teachers-management"></div>
+                </section>
+
+                <!-- Memories Section -->
+                <section id="memories" class="section">
+                    <div class="section-header">
+                        <h2>Submitted Memories</h2>
+                    </div>
+                    <div id="memoriesList" class="memories-management"></div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="section">
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <h3>Site Title</h3>
+                            <input type="text" id="siteTitle" placeholder="Enter site title" class="form-input">
+                            <button class="btn-primary" onclick="saveSetting('siteTitle')">Save</button>
+                        </div>
+                        <div class="settings-card">
+                            <h3>Hero Subtitle</h3>
+                            <input type="text" id="heroSubtitle" placeholder="Enter hero subtitle" class="form-input">
+                            <button class="btn-primary" onclick="saveSetting('heroSubtitle')">Save</button>
+                        </div>
+                        <div class="settings-card">
+                            <h3>Instagram Link</h3>
+                            <input type="text" id="instagramLink" placeholder="Enter Instagram URL" class="form-input">
+                            <button class="btn-primary" onclick="saveSetting('instagramLink')">Save</button>
+                        </div>
+                        <div class="settings-card">
+                            <h3>WhatsApp Number</h3>
+                            <input type="text" id="whatsappNumber" placeholder="Enter WhatsApp number" class="form-input">
+                            <button class="btn-primary" onclick="saveSetting('whatsappNumber')">Save</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Activity Logs Section -->
+                <section id="activity-logs" class="section">
+                    <div class="section-header">
+                        <h2>Activity Logs & Device Tracking</h2>
+                        <div class="log-filters">
+                            <select id="deviceFilter" class="form-select">
+                                <option value="">All Devices</option>
+                                <option value="Desktop">Desktop</option>
+                                <option value="Mobile">Mobile</option>
+                                <option value="Tablet">Tablet</option>
+                            </select>
+                            <select id="actionFilter" class="form-select">
+                                <option value="">All Actions</option>
+                                <option value="Page View">Page View</option>
+                                <option value="Gallery Image Viewed">Gallery Viewed</option>
+                                <option value="Form Submitted">Form Submitted</option>
+                                <option value="Section Viewed">Section Viewed</option>
+                            </select>
+                            <button class="btn-primary" onclick="exportActivityLogs()">
+                                <i class="fas fa-download"></i> Export CSV
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-stats">
+                        <div class="activity-stat-card">
+                            <h3>Total Visitors</h3>
+                            <p class="stat-number" id="totalVisitors">0</p>
+                        </div>
+                        <div class="activity-stat-card">
+                            <h3>Desktop Users</h3>
+                            <p class="stat-number" id="desktopUsers">0</p>
+                        </div>
+                        <div class="activity-stat-card">
+                            <h3>Mobile Users</h3>
+                            <p class="stat-number" id="mobileUsers">0</p>
+                        </div>
+                        <div class="activity-stat-card">
+                            <h3>Tablet Users</h3>
+                            <p class="stat-number" id="tabletUsers">0</p>
+                        </div>
+                    </div>
+
+                    <div class="activity-logs-table">
+                        <table id="activityLogsTable">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Device Type</th>
+                                    <th>Browser</th>
+                                    <th>OS</th>
+                                    <th>Action</th>
+                                    <th>Page</th>
+                                    <th>IP/Resolution</th>
+                                </tr>
+                            </thead>
+                            <tbody id="activityLogsBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Forms -->
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Add Item</h2>
+            <form id="itemForm" class="form">
+                <div id="formFields"></div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="supabase-config.js"></script>
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "12th-a-memories",
+  "version": "1.0.0",
+  "description": "12th A Class Memories Website with Admin Dashboard",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "netlify deploy --prod"
+  },
+  "keywords": [
+    "memories",
+    "class",
+    "12th",
+    "website",
+    "admin-dashboard"
+  ],
+  "author": "Ankit Shukla",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
